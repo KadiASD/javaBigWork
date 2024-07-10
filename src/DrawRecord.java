@@ -10,6 +10,7 @@ public class DrawRecord {
     public DrawRecord(){
         SGap = _SGap;
         AGap = _AGap;
+        drawRecord = new Vector<Card>();
     }
 
     public void AddRecord(Card card){
@@ -38,4 +39,7 @@ public class DrawRecord {
     public int getSGap(){return SGap;}
     public int getAGap(){return AGap;}
 
+    public void setSGap(int SGap){this.SGap = SGap;}
+
+    public void setAGap(int AGap) {this.AGap = AGap;}
 }

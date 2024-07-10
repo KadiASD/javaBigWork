@@ -9,6 +9,7 @@ public class PlayerAccount {
 
     private DrawRecord drawRecord;
 
+    public PlayerAccount(){}
 
     public PlayerAccount(String ID,String Name,String pwd){
         this.ID = ID;

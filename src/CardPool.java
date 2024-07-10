@@ -6,7 +6,8 @@ public class CardPool {
     Vector<Card> Bpool;
     Vector<Card> Apool;
     Vector<Card> Spool;
-    private final int cost = 280;
+    Map<String,Card> cardMap;
+    final int cost = 280;
     Map<Level,Double> probability;
 
 
@@ -15,13 +16,17 @@ public class CardPool {
         Bpool = new Vector<Card>();
         Apool = new Vector<Card>();
         Spool = new Vector<Card>();
+        cardMap = new HashMap<String,Card>();
+        probability = new HashMap<Level,Double>();
         probability.put(Level.S,0.006);
         probability.put(Level.A,0.094);
         probability.put(Level.B,0.4);
         probability.put(Level.C,0.5);
+
     }
 
     public void putCard(Card card){
+        cardMap.put(card.getCnum(),card);
         Level level = card.getLevel();
         switch (level){
             case S:
@@ -39,6 +44,10 @@ public class CardPool {
         }
     }
 
+    public Card getCardByCnum(String cnum){
+        return cardMap.get(cnum);
+    }
+
     public Card Draw(PlayerAccount playerAccount){
         if(!playerAccount.subCurrency(cost)){return null;}
         Card result;
@@ -47,9 +56,10 @@ public class CardPool {
         int AGap = drawRecord.getAGap();
         Level level;
         Random random = new Random();
-        Date date = new Date();
-        random.setSeed(date.getTime());
+        //Date date = new Date();
+        //random.setSeed(date.getTime());
         Double p = random.nextDouble();
+        System.out.println(p);
         if(SGap == 1)level = Level.S;
         else if(AGap == 1)level = Level.A;
         else {
@@ -77,7 +87,7 @@ public class CardPool {
                 pool = Cpool;
                 break;
         }
-        result = pool.get(random.nextInt(0,pool.size()));
+        result = pool.get(random.nextInt(pool.size()));
         drawRecord.AddRecord(result);
         return result;
     }

@@ -12,4 +12,5 @@ public class Card {
     public Level getLevel(){return level;}
 
     public String getName(){return name;}
+    public String getCnum(){return Cnum;}
 }
